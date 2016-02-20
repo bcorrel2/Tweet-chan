@@ -3,7 +3,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
             # A fully automated Twitter-bot #
 
-import time, tweepy
+import time, tweepy, random
 
 #---------------------Access Keys--------------------------#
 
@@ -23,21 +23,31 @@ lines = file.readlines()
 file.close()
 length=len(lines)
 
-def tweet(lines,length,lineStart):
+def tweet(lines,length):
+    
+    int = random.randrange(0,length)
+    
+    if (int%2 != 0):
+        int+=1
+    if (int == length):
+        int-=3
+    
+    print int
 
-    if(lineStart>length):
-        return
+    post = lines[int]
 
-    a = lines[lineStart]
+    print post
 
-    api.update_status(a)
+    api.update_status(post)
 
+    print '-POSTED-'
+    
     time.sleep(360)
 
-    tweet(lines,length,lineStart+2)
+    tweet(lines,length)
 
 
-tweet(lines,length,0)
+tweet(lines,length)
 
 print 'complete'
 
