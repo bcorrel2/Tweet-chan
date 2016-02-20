@@ -47,9 +47,9 @@ def tweet(lines,length):
     tweet(lines,length)
 
 
-tweet(lines,length)
+tweet(lines,length) #Instigates Infinite Loop. Each cycle will post a Tweet, then sleep for a specified amount of time.
 
-print 'complete'
+print '-COMPLETE-' #Ideally, this should never be printed. The ideal scenario is an infinite loop.
 
 
 
