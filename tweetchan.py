@@ -59,7 +59,7 @@ def tweetCycle(lines,length,lastint):
     
     print '-POSTED-'
     
-    time.sleep(60)
+    time.sleep(360)
     
     tweetCycle(lines,length,int)
     
