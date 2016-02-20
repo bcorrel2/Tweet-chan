@@ -23,34 +23,54 @@ lines = file.readlines()
 file.close()
 length=len(lines)
 
-def tweet(lines,length):
+#-----------------------Functions--------------------------#
+
+def checkTweet(lines,length,int):
+    if(int == length):
+        return True
+
+    post = lines[int]
     
-    int = random.randrange(0,length)
+    if(len(post)>140):
+        return False
     
-    if (int%2 != 0):
-        int+=1
-    if (int == length):
-        int-=3
+    checkTweet(lines,length,int+1)
+
+          """"""""""""""""""""""""""""""""""""
+
+def tweetCycle(lines,length,lastint):
+    
+    int = lastint
+    
+    while(lastint == int or int == length):
+
+        int = random.randrange(0,length)
+    
+        if (int%2 != 0):
+            int+=1
     
     print int
 
     post = lines[int]
-
+    
     print post
-
+    
     api.update_status(post)
-
+    
     print '-POSTED-'
     
-    time.sleep(360)
+    time.sleep(60)
+    
+    tweetCycle(lines,length,int)
+    
+#----------------------------------------------------------#
 
-    tweet(lines,length)
+valid = checkTweet(lines,length,0)
 
+if(valid==True):
+    tweetCycle(lines,length,-1)
 
-tweet(lines,length) #Instigates Infinite Loop. Each cycle will post a Tweet, then sleep for a specified amount of time.
+else:
+    print 'Error: Invalid Tweets Detected'
 
-print '-COMPLETE-' #Ideally, this should never be printed. The ideal scenario is an infinite loop.
-
-
-
-
+print '==Program Complete==' #Ideally Should only execute if an invalid list of Tweets is presented.
