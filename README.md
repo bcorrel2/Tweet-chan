@@ -9,7 +9,7 @@ Current inactive accounts include:
     
 ***Conception***
 
-Tweet-chan was concieved and programmed at the 2016 HackIllinois Hackathon. The goal of Tweet-chan was to develop a powerful script with real world implictions using simple python code . 
+Tweet-chan was concieved and programmed at the 2016 HackIllinois Hackathon. The goal of Tweet-chan was to develop a powerful script with real world implictions using simple python code. 
 
 ***Tweet-chan***
 
