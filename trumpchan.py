@@ -31,10 +31,11 @@ length=len(lines)
 #-----------------------Functions--------------------------#
 
 def BuildaWall(lines,length,int): #Equivalent to checkTweet()
+
     if(int == length):
         return True
     
-    rhetoric = lines[int]
+    rhetoric = lines[int] #Equivalent to post
     
     if(len(rhetoric)>140):
         return False
@@ -43,41 +44,59 @@ def BuildaWall(lines,length,int): #Equivalent to checkTweet()
         
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-def MakeAmericaGreatAgain(lines,length,lastint): #Equivalent to tweetCycle()
+def MakeAmericaGreatAgain(lines,length,lastint,x): #Equivalent to tweetCycle()
     
     int = lastint
     
-    while(lastint == int or int == length):
-        
-        int = random.randrange(0,length)
-        
-        if (int%2 != 0):
-            int+=1
+    if (x == 86400): # As currently designed, x will be 86400 24n hours from start.
+        x = 0
+        print '==MIDNIGHT=='
 
-    rhetoric= lines[int]
+        try:
+            api.update_status("It's a new day. Time to #MakeAmericaGreatAgain!") # Trump starts his Day the American Way
+        except:
+            tweepy.TweepError
 
-    print '==NEW TWEET=='
-    print rhetoric
+    else:
+        while(lastint == int or int == length):
+        
+            int = random.randrange(0,length)
+        
+            if (int%2 != 0):
+                int+=1
+
+        rhetoric= lines[int]
+
+        print '==PREPARING=='
+
+        try:
+            api.update_status(rhetoric)
+        except:
+            tweepy.TweepError
+
+    print '==POSTED=='
+    print time.asctime(time.localtime(time.time()))
     
-    api.update_status(rhetoric)
+    for follower in tweepy.Cursor(api.followers).items(): # Amasses an Army of Voters
+        follower.follow()
     
-    print '=POSTED='
+    x+=1800
+    time.sleep(1800)    # Time shortened to 30 min, because Trump doesn't wait.
     
-    time.sleep(60)
-    
-    MakeAmericaGreatAgain(lines,length,int)
+    MakeAmericaGreatAgain(lines,length,int,x)
 
 #----------------------------------------------------------#
 
 valid = BuildaWall(lines,length,0)
 
 if(valid==True):
-    MakeAmericaGreatAgain(lines,length,-1)
+    MakeAmericaGreatAgain(lines,length,-1,86400)
 
 else:
-    print 'Error: Jeb Bush is a waste of space'
+    print 'Error: Cruz is using his Dirty Tricks!'
 
 print '==Campaign Complete=='
+
 
 
 
