@@ -4,7 +4,8 @@
       # An comical implemented example of Tweet-Chan #
 """        The Nature of This Program is Satirical.      """
 """    Any Offense Derived From This Program is on You   """
-
+      #              @trump_chan                     #
+      
                 #MakeAmericaGreatAgain
 
 import time, tweepy, random
