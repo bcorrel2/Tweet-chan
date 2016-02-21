@@ -1,5 +1,5 @@
 # Tweet-chan
-An Automated Twitter-Bot v1.1.0 2/21/16
+Automated Twitter-Bot v1.1.0 2/21/16
 
 Current active accounts include:
     @trump_chan
