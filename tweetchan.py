@@ -2,7 +2,6 @@
 ##                    Tweet-Chan                          ##
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
             # A fully automated Twitter-bot #
-            #        @trump_chan            #
 
 import time, tweepy, random
 
@@ -19,27 +18,29 @@ api = tweepy.API(auth)
 
 #----------------------------------------------------------#
 
-file = open('tweets.txt','r')
+file = open('text.txt','r')
 lines = file.readlines()
 file.close()
 length=len(lines)
 
 #-----------------------Functions--------------------------#
 
-def checkTweet(lines,length,int):
+def checkTweet(lines,length,int): #Function checks that every tweet is a valid tweet
+
     if(int == length):
         return True
-
+    
     post = lines[int]
     
     if(len(post)>140):
         return False
-    
-    checkTweet(lines,length,int+1)
 
-          """"""""""""""""""""""""""""""""""""
+    else:
+        return checkTweet(lines,length,int+1)
 
-def tweetCycle(lines,length,lastint):
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+def tweetCycle(lines,length,lastint): #Function recurses indefinelty, sleeping between recurses.
     
     int = lastint
     
@@ -47,26 +48,31 @@ def tweetCycle(lines,length,lastint):
 
         int = random.randrange(0,length)
     
-        if (int%2 != 0):
+        if (int%2 != 0): # All quotes are held on even lines
             int+=1
-    
-    print int
 
     post = lines[int]
     
-    print post
+    print '-PREPARING-'
     
-    api.update_status(post)
+    try:
+        api.update_status(post)
+    except:
+        tweepy.TweepError
     
     print '-POSTED-'
+    print time.asctime(time.localtime(time.time()))
+
+    for follower in tweepy.Cursor(api.followers).items(): # Automatically Follows Any User that Follows the Bot
+        follower.follow()
     
-    time.sleep(360)
+    time.sleep(3600) # 1 hr intervals between tweets
     
     tweetCycle(lines,length,int)
-    
+
 #----------------------------------------------------------#
 
-valid = checkTweet(lines,length,0)
+valid = checkTweet(lines,length,0) 
 
 if(valid==True):
     tweetCycle(lines,length,-1)
@@ -74,5 +80,4 @@ if(valid==True):
 else:
     print 'Error: Invalid Tweets Detected'
 
-print '==Program Complete==' #Ideally Should only execute if an invalid list of Tweets is presented.
-
+print '==Program Complete=='
