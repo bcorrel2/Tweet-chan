@@ -2,6 +2,7 @@
 ##                    Tweet-Chan                          ##
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
             # A fully automated Twitter-bot #
+            #        @trump_chan            #
 
 import time, tweepy, random
 
