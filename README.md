@@ -6,7 +6,10 @@ Current active accounts include:
     
 Current inactive accounts include:
     @TweetChan28
-    
+
+***Update Notes***
+-Program now reads text.txt every hour. This will allow new tweets added to the file to quickly and eaily be added into the bots database. In previous versions, the bot had to be stopped before the tweets could be changed.
+
 ***Conception***
 
 Tweet-chan was concieved and programmed at the 2016 HackIllinois Hackathon. The goal of Tweet-chan was to develop a powerful script with real world implictions using simple python code. After reading an article about Twitter-bots, I stumbled upon Tweepy, an API that intrigued me. Thus, I decided to use it to create my own personal Twitter-bot.
