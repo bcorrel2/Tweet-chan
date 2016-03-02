@@ -1,7 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-##                    Tweet-Chan                          ##
+##                    Tweet-Chan 1.0                      ##
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-            #         Version 1.1        #
+#              A fully Automated Twitter-bot               #
 
 import time, tweepy, random
 
