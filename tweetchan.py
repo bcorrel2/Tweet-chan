@@ -1,32 +1,27 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-##                    Tweet-Chan                          ##
+##                   Tweet-Chan 1.1                       ##
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-            # A fully automated Twitter-bot #
+#            A fully automated Twitter-bot                 #
 
 import time, tweepy, random
 
 #---------------------Access Keys--------------------------#
+"""                  @TweetChan28                        """
 
-consumer_key = 'enter-key-here'
-consumer_secret = 'enter-key-here'
-token_key = 'enter-key-here'
-token_secret = 'enter-key-here'
+consumer_key = 'insert_key_here'
+consumer_secret = 'insert_key_here'
+token_key = 'insert_key_here'
+token_secret = 'insert_key_here'
 
 auth = tweepy.OAuthHandler(consumer_key,consumer_secret)
 auth.set_access_token(token_key,token_secret)
 api = tweepy.API(auth)
 
-#----------------------------------------------------------#
-
-file = open('text.txt','r')
-lines = file.readlines()
-file.close()
-length=len(lines)
-
 #-----------------------Functions--------------------------#
 
-def checkTweet(lines,length,int): #Function checks that every tweet is a valid tweet
 
+def checkTweet(lines,length,int): #Function to check text file for invalid tweets
+    
     if(int == length):
         return True
     
@@ -34,21 +29,32 @@ def checkTweet(lines,length,int): #Function checks that every tweet is a valid t
     
     if(len(post)>140):
         return False
-
+    
     else:
         return checkTweet(lines,length,int+1)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-def tweetCycle(lines,length,lastint): #Function recurses indefinelty, sleeping between recurses.
+def tweetCycle(lastint): #Function to continue tweeting until an invalid tweet is logged
+    
+    file = open('text.txt','r')
+    lines = file.readlines()
+    file.close()
+    length=len(lines)
+    
+    valid = checkTweet(lines,length,0)
+
+    if(valid!=True):
+        print 'Error: Invalid Tweet(s) Detected'
+        return
     
     int = lastint
-    
-    while(lastint == int or int == length):
 
+    while(lastint == int or int == length):
+        
         int = random.randrange(0,length)
-    
-        if (int%2 != 0): # All quotes are held on even lines
+        
+        if (int%2 != 0):
             int+=1
 
     post = lines[int]
@@ -59,26 +65,27 @@ def tweetCycle(lines,length,lastint): #Function recurses indefinelty, sleeping b
         api.update_status(post)
     except:
         tweepy.TweepError
-    
-    print '-POSTED-'
-    print time.asctime(time.localtime(time.time()))
 
-    for follower in tweepy.Cursor(api.followers).items(): # Automatically Follows Any User that Follows the Bot
+    print time.asctime(time.localtime(time.time()))
+    print '-POSTED-'
+    print
+
+    
+    for follower in tweepy.Cursor(api.followers).items():
         follower.follow()
     
-    time.sleep(3600) # 1 hr intervals between tweets
+    time.sleep(3600) #30 seconds
     
-    tweetCycle(lines,length,int)
+    tweetCycle(int)
 
 #----------------------------------------------------------#
 
-valid = checkTweet(lines,length,0) 
-
-if(valid==True):
-    tweetCycle(lines,length,-1)
-
-else:
-    print 'Error: Invalid Tweets Detected'
+tweetCycle(-1)
 
 print '==Program Complete=='
+
+#----------------------------------------------------------#
+
+
+
 
