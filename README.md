@@ -8,6 +8,7 @@ Current inactive accounts include:
     @TweetChan28
 
 ***Update Notes***
+
 -Program now reads text.txt every hour. This will allow new tweets added to the file to quickly and eaily be added into the bots database. In previous versions, the bot had to be stopped before the tweets could be changed.
 
 ***Conception***
