@@ -19,7 +19,6 @@ api = tweepy.API(auth)
 
 #-----------------------Functions--------------------------#
 
-
 def checkTweet(lines,length,int): #Function to check text file for invalid tweets
     
     if(int == length):
